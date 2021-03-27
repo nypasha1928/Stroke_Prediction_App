@@ -21,7 +21,7 @@ function setup() {
   gallery.addVisual(new StrokevsHypertension());
   
   gallery.addVisual(new StrokevsResidencetype());
-  gallery.addVisual(new USEarthQuakeMap());
+  gallery.addVisual(new StrokevsEverMarried());
 }
 
 function draw() {

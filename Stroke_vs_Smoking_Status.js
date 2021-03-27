@@ -9,13 +9,13 @@ function StrokevsSmokingStatus() {
 
 
 
-  // Property to represent data has been loaded.
+  // Property to represent whether data has been loaded.
   this.loaded = false;
 
   this.layout = {
-  width: 600,
-  height: 500,
-  };
+    width: 800,
+    height: 700,
+    };
 
   this.setup = function () {
     var width = this.layout.width;
@@ -37,33 +37,40 @@ function StrokevsSmokingStatus() {
 
     Plotly.d3.csv('data/Stroke_new_data.csv', function(err, rows){
           console.log(rows);
+
   
+    var xValue = ['Formerly Smoked', 'Never Smoked', 'Smokes', 'Unknown'];
+    var yValue = ['23.23%', '51.54%', '20.38%', '4.85%'];
+    // var textList = [28550, 1428];
+
+    var trace = {
+      x: xValue,
+      y: yValue,
+      type: 'bar',
+      textposition: 'auto',
+      text : yValue.map(String),
+      hoverinfo: ['23.23%', '51.54%', '20.38%', '4.85%'],
+      marker: {
+        color : ['SandyBrown', '#9e3d22', 'NavajoWhite', 'BlanchedAlmond']
+      },
+
+      // orientation: 'h'
+    };
+
+    var data = [ trace];
+    
+    var layout = {
+      title: {text :'Being a smoker or a formerly smoker <br> increases your risk of having a stroke', font:{size:14}},
+      size : 14,
+      barmode : 'stack',
+      xaxis: {title: "Smoking Status"},
+      yaxis: {title: "Percentage  of  Stroke"}
+    };
+
 
     
-   // We need to convert it to array before we can pass it to Plotly.
-   //  You can do that easily by using map method.
-    var smoking_status = [];
-    var stroke =[];
-    smoking_status=rows.map(row => row.smoking_status);
-    stroke=rows.map(row => row.stroke);
-    console.log(smoking_status);
  
-
-    var StrokeSmoke = {
-      x:smoking_status,
-      y:stroke,
-
-      type:'bar'
-    };
-    var layout = {
-      
-      title: {text :'Being a smoker or a formerly smoker <br> increases your risk of having a stroke', font:{size:14}},
-      // subtitle:{text :'Smoking Status a formerly smoker increases your risk of having a stroke'},
-      // text:"Being a smoker or a formerly smoker increases your risk of having a stroke"
-      xaxis: {title: "Smoking Status"},
-      yaxis: {title: "Count"}    
-    };
-    Plotly.newPlot('chart', [StrokeSmoke], layout);
+    Plotly.newPlot('chart', data, layout);
 
     });
   }
@@ -72,5 +79,6 @@ function StrokevsSmokingStatus() {
     if (document.getElementsByClassName('p5Canvas')) {
       document.getElementsByClassName('p5Canvas')[0].style.display = 'block';
     }
-  };  
+  };   
 }
+

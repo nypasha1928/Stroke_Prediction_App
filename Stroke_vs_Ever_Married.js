@@ -1,4 +1,4 @@
-function USEarthQuakeMap() {
+function StrokevsEverMarried() {
   // Name for the visualisation to appear in the menu bar.
   this.name = 'Stroke vs Ever Married';
 
